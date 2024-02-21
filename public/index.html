@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+
+    <div id="wrapper">
+        <img class="page" src="page1.svg" alt="">
+        <img class="page" src="page1.svg" alt="">
+    </div>
+
+    <div id="leftPanel">
+        <div id="address" class="shortcut">
+            <a href="https://maps.app.goo.gl/7dkfoTR8EVZCZzgU6">
+                <img src="address.svg" alt="">
+            </a>            
+        </div>
+        <div id="countdown" class="shortcut">
+            <a href="" id="countdownRef">
+                <img src="countdown.svg" alt="">
+            </a>            
+        </div>        
+        <div id="confirmation" class="shortcut">
+            <a href="" id="confirmationWindow">
+                <img src="confirmation.svg" alt="">
+            </a>
+        </div>
+
+    </div>
+
+    <div id="countdownWindow" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="timer">
+                <div class="sub_timer">
+                    <h1 id="day" class="digit">00</h1>
+                    <p class="digit_name">Dias</p>
+                </div>
+                <div class="sub_timer">
+                    <h1 id="hour" class="digit">00</h1>
+                    <p class="digit_name">Horas</p>
+                </div>
+                <div class="sub_timer">
+                    <h1 id="min" class="digit">00</h1>
+                    <p class="digit_name">Minutos</p>
+                </div>
+                <div class="sub_timer">
+                    <h1 id="sec" class="digit">00</h1>
+                    <p class="digit_name">Segundos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+      
+ 
+    <script src='main.js'></script>
+</body>
+</html>
