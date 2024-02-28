@@ -1,3 +1,6 @@
+//Create Uid
+
+
 //Hide loader
 let imagesLoaded = 0;
 const images = document.querySelectorAll('img');

@@ -1,0 +1,30 @@
+{
+  "name": "invitations",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esau15302/invitations.git"
+  },
+  "author": "Esau15302",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Esau15302/invitations/issues"
+  },
+  "homepage": "https://github.com/Esau15302/invitations#readme",
+  "devDependencies": {
+    "css-loader": "^6.10.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1"
+  }
+}

@@ -31,6 +31,7 @@ html, body {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 5vh;
+    position: relative;
 }
 
 
@@ -226,4 +227,36 @@ html, body {
     58% {transform: scaleX(1);}
     75% {transform: scaleX(0.98);}
     100% {transform: scaleX(1);}
+}
+
+/* Pulse effect */
+.pulse {
+    position: absolute;
+    margin-left:auto;
+    margin-right:auto;
+    left:0;
+    right:0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0px;
+    height: 0px;
+    border-radius: 10px;
+    background: rgba(140, 0, 255, 0);
+    -webkit-box-shadow: 0 0 0 0 rgb(140, 0, 255);
+    box-shadow: 0 0 0 0 rgb(140, 0, 255);
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(.66, 0, 0, 1);
+}
+  
+@-webkit-keyframes pulse {
+    to {
+            -webkit-box-shadow: 0 0 0 50px rgba(232, 76, 61, 0);
+            box-shadow: 0 0 0 50px rgba(232, 76, 61, 0);
+        }
+}
+@keyframes pulse {
+    to {
+            -webkit-box-shadow: 0 0 0 50px rgba(232, 76, 61, 0);
+            box-shadow: 0 0 0 50px rgba(232, 76, 61, 0);
+        }
 }
