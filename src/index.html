@@ -28,7 +28,7 @@
         </div>        
         <div id="confirmation" class="shortcut">
             <div id="showConfirmation" class="pulse"></div>
-            <a href="" id="confirmationWindow" >
+            <a href="" id="confirmationRef">
                 <img src="<%= require('./assets/confirmation.svg') %>" alt="">
             </a>
         </div>
@@ -58,6 +58,31 @@
         </div>
     </div>
 
+    <div id="confirmationWindow" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="form">
+                Hola: <input type="text" placeholder="Tu nombre..."/>
+                <br>
+                Podras acompanarnos a mi bautizo?
+                <label for="">
+                    SI
+                </label>
+                <input type="radio" name="confirm">                    
+                <label for="">
+                    NO
+                </label>
+                <input type="radio" name="confirm">
+                <br>
+                Cuantas personas iran contigo? <input type="number" />
+                <br>
+                <button>Salvar</button>               
+            </div>
+        </div>
+    </div>
+
+
+ 
     <div id="uploadBackground">
         <div class="contact-envelope">
             <div class="envelope">

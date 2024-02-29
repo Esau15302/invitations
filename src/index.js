@@ -1,5 +1,23 @@
 import './main.css';
 import { v4 as uuidv4 } from 'uuid';
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set } from "firebase/database";
+
+
+//Initialize firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDTwgtxgobWdVtATK2hnnE8Ney6dnYogI8",
+  authDomain: "invitaciones-1cb9e.firebaseapp.com",
+  databaseURL: "https://invitaciones-1cb9e-default-rtdb.firebaseio.com",
+  projectId: "invitaciones-1cb9e",
+  storageBucket: "invitaciones-1cb9e.appspot.com",
+  messagingSenderId: "28631399196",
+  appId: "1:28631399196:web:92fe740523c62a07bf98d9"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+
 
 //Create Uid
 const showConfirm = document.getElementById('showConfirmation');
@@ -8,7 +26,13 @@ const uuidOld = localStorage.getItem('uid');
 if (uuidOld) {
   showConfirm.style.display = 'none';
 } else {
-  localStorage.setItem('uid', uuidv4());
+  const uid = uuidv4();
+  localStorage.setItem('uid', uid);
+  set(ref(db, 'invitados/' + uid), {
+    name:'',
+    confirmation:'',
+    total:''
+  });
 }
 
 //Hide loader
@@ -55,27 +79,37 @@ setInterval(timer, 1000);
 
 //Show modal
 const countdownWindow = document.getElementById('countdownWindow');
-const btn = document.getElementById("countdownRef");
+const confirmationWindow = document.getElementById('confirmationWindow');
+const countdownRef = document.getElementById("countdownRef");
+const confirmationRef = document.getElementById("confirmationRef");
 const span = document.getElementsByClassName("close")[0];
 
-btn.onclick = function(event) {
+countdownRef.onclick = function(event) {
     event.preventDefault(); 
     countdownWindow.style.display = "block";
 }
 
+confirmationRef.onclick = function(event) {
+  event.preventDefault(); 
+  confirmationWindow.style.display = "block";
+}
+
 span.onclick = function() {
   countdownWindow.style.display = "none";
+  confirmationWindow.style.display = 'none';
 }
 
 window.onclick = function(event) {
-  if (event.target == countdownWindow) {
+  if (event.target == countdownWindow || event.target == confirmationWindow) {
     countdownWindow.style.display = "none";
+    confirmationWindow.style.display = 'none';
   }
 }
 //Para IOS
 window.addEventListener('touchend', function(event) {
-  if (event.target == countdownWindow) {
+  if (event.target == countdownWindow || event.target == confirmationWindow) {
     countdownWindow.style.display = "none";
+    confirmationWindow.style.display = 'none';
   }
 });
 
