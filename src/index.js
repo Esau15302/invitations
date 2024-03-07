@@ -1,7 +1,7 @@
 import './main.css';
 import { v4 as uuidv4 } from 'uuid';
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, update, get, child} from "firebase/database";
 
 
 //Initialize firebase
@@ -15,25 +15,66 @@ const firebaseConfig = {
   appId: "1:28631399196:web:92fe740523c62a07bf98d9"
 };
 
+let uidGuestG = localStorage.getItem('uid');
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
+const dbRef = ref(db);
 
-
-//Create Uid
-const showConfirm = document.getElementById('showConfirmation');
-const uuidOld = localStorage.getItem('uid');
-
-if (uuidOld) {
-  showConfirm.style.display = 'none';
-} else {
-  const uid = uuidv4();
-  localStorage.setItem('uid', uid);
-  set(ref(db, 'invitados/' + uid), {
-    name:'',
-    confirmation:'',
-    total:''
-  });
+function registerGuestDefault() {
+    const uidGuest = uuidv4();
+    set(ref(db, 'invitados/' + uidGuest), {
+      name:'',
+      confirm: '',
+      total: ''
+    })
+    .then(() => {
+      localStorage.setItem('uid', uidGuest);
+      uidGuestG = uidGuest;
+    })
+    .catch((error) => {
+      console.error(error);
+    }); 
 }
+
+function updateGuestData(uidGuest, name, confirm, totalGuests) {
+  const newDataGuest = {
+    name: name,
+    confirm: confirm,
+    total: totalGuests
+  };
+  const updates = {};
+  updates['invitados/' + uidGuest] = newDataGuest;
+  return update(dbRef, updates);
+}
+
+async function getDataGuest(uidGuest) {
+  const getData = await get(child(dbRef, `invitados/${uidGuest}`))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+  return getData;
+}
+
+
+
+const alertConfirm = document.getElementById('showConfirmation');
+const showConfirm = localStorage.getItem('showConfirm');
+
+if(!uidGuestG) {
+  registerGuestDefault();
+}
+
+if(showConfirm) {
+  alertConfirm.style.display = 'none';
+}
+
 
 //Hide loader
 let imagesLoaded = 0;
@@ -60,7 +101,7 @@ images.forEach(image => {
 });
 
 //Countdown
-const target_mili_sec = new Date("Feb 29, 2024 14:30:0").getTime();
+const target_mili_sec = new Date('2024-04-07').getTime();
 function timer() {
   const now_mili_sec = new Date().getTime();
   const remaining_sec = Math.floor( (target_mili_sec - now_mili_sec) / 1000 );
@@ -82,34 +123,61 @@ const countdownWindow = document.getElementById('countdownWindow');
 const confirmationWindow = document.getElementById('confirmationWindow');
 const countdownRef = document.getElementById("countdownRef");
 const confirmationRef = document.getElementById("confirmationRef");
-const span = document.getElementsByClassName("close")[0];
+const nameGuest = document.getElementById("nameGuest");
+
+const totalGuest = document.getElementById("totalGuest");
+// const closeX = document.getElementsByClassName("closeX");
+const  closeX = document.querySelectorAll('.closeX');
+console.log(closeX)
 
 countdownRef.onclick = function(event) {
     event.preventDefault(); 
     countdownWindow.style.display = "block";
 }
 
-confirmationRef.onclick = function(event) {
-  event.preventDefault(); 
+confirmationRef.onclick = async function(event) {
+  event.preventDefault();
+  console.log('uid: ',uidGuestG);
+  const dataGuest = await getDataGuest(uidGuestG);
+  console.log(dataGuest);
+  nameGuest.value = dataGuest.name;
+  if( dataGuest.confirm.toString() != '') {
+    document.querySelector(`input[type="radio"][value=${dataGuest.confirm.toString()}]`).checked = true;
+  }
+  
+  totalGuest.value = dataGuest.total;
   confirmationWindow.style.display = "block";
 }
 
-span.onclick = function() {
-  countdownWindow.style.display = "none";
+
+closeX.forEach(function(element) {
+  element.onclick = function() {
+    console.log("cerrar")
+    countdownWindow.style.display = 'none';
+    confirmationWindow.style.display = 'none';
+  }
+});
+
+
+
+saveConfirm.onclick = function() {
+  const confirm = document.querySelector('input[name="confirm"]:checked');
+  console.log(confirm.value);
+  updateGuestData(uidGuestG, nameGuest.value, (confirm.value === 'true'), parseInt(totalGuest.value));
   confirmationWindow.style.display = 'none';
+  localStorage.setItem('showConfirm', true);
+  alertConfirm.style.display = 'none';
 }
 
 window.onclick = function(event) {
   if (event.target == countdownWindow || event.target == confirmationWindow) {
     countdownWindow.style.display = "none";
-    confirmationWindow.style.display = 'none';
   }
 }
 //Para IOS
 window.addEventListener('touchend', function(event) {
   if (event.target == countdownWindow || event.target == confirmationWindow) {
     countdownWindow.style.display = "none";
-    confirmationWindow.style.display = 'none';
   }
 });
 

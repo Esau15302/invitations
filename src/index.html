@@ -6,13 +6,16 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title><%= htmlWebpackPlugin.options.title %></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta property="og:title" content="Mi bautizo" />
+    <meta property="og:description" content="Te espero el 7 de Abril" />
+    <meta property="og:image" itemprop="image" content="https://cdn-icons-png.flaticon.com/512/3485/3485800.png">
 </head>
 <body>
 
     <div id="wrapper">
-        <!-- <img class="page" src="page1.svg" alt="">
-        <img class="page" src="page2.svg" alt="">
-        <img class="page" src="page3.svg" alt="">         -->
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/page1.svg?alt=media&token=34fe0114-1ee1-42d3-ab24-52ced7cfc5b4" alt="">
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/page2.svg?alt=media&token=ecdbbb46-9d77-40d3-b6fe-181af3b7e57b" alt="">
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/page3.svg?alt=media&token=ce5029a4-5cd6-4da6-8779-c1b084587b9e" alt="">        
     </div>
 
     <div id="leftPanel">
@@ -36,7 +39,7 @@
 
     <div id="countdownWindow" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="closeX">&times;</span>
             <div class="timer">
                 <div class="sub_timer">
                     <h1 id="day" class="digit">00</h1>
@@ -60,29 +63,33 @@
 
     <div id="confirmationWindow" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="closeX">&times;</span>
             <div class="form">
-                Hola: <input type="text" placeholder="Tu nombre..."/>
-                <br>
-                Podras acompanarnos a mi bautizo?
-                <label for="">
-                    SI
-                </label>
-                <input type="radio" name="confirm">                    
-                <label for="">
-                    NO
-                </label>
-                <input type="radio" name="confirm">
-                <br>
-                Cuantas personas iran contigo? <input type="number" />
-                <br>
-                <button>Salvar</button>               
+                <div class="form-group">
+                    <label for="nameGuest">Hola:</label>
+                    <input type="text" id="nameGuest" name="nameGuest">
+                </div>
+                <div class="form-group">
+                    <label for="totalGuest">Podras acompañarnos:</label>
+                    <input type="radio" name="confirm" value="true" id="yes" checked />
+                    <input type="radio" name="confirm" value="false" id="no"/>
+                    <div class="switch">
+                        <label for="yes">Si</label>
+                        <label for="no">No</label>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="totalGuest">Cuantas personas vendrán contigo:</label>
+                    <input type="number" id="totalGuest" name="totalGuest">
+                </div>
+                <button id="saveConfirm">Confirmar</button>
             </div>
+
+
         </div>
     </div>
 
-
- 
     <div id="uploadBackground">
         <div class="contact-envelope">
             <div class="envelope">
