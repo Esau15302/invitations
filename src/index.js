@@ -20,13 +20,21 @@ let uidGuestG = localStorage.getItem('uid');
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const dbRef = ref(db);
+let dataGuest = null;
+
+function getTimestampInSeconds () {
+  return Date.now().toString();
+}
 
 function registerGuestDefault() {
     const uidGuest = uuidv4();
     set(ref(db, 'invitados/' + uidGuest), {
       name:'',
       confirm: '',
-      total: ''
+      total: 0,
+      seen: getTimestampInSeconds(),
+      fConfirm: '',
+      lConfirm: ''
     })
     .then(() => {
       localStorage.setItem('uid', uidGuest);
@@ -38,11 +46,20 @@ function registerGuestDefault() {
 }
 
 function updateGuestData(uidGuest, name, confirm, totalGuests) {
+  const dateConfirm = getTimestampInSeconds();
   const newDataGuest = {
     name: name,
     confirm: confirm,
-    total: totalGuests
+    total: totalGuests,
+    seen: dataGuest.seen,
+    fConfirm: dataGuest.fConfirm,
+    lConfirm: dataGuest.lConfirm
   };
+  if (!dataGuest.fConfirm) {
+    newDataGuest.fConfirm = dateConfirm;
+  } else {
+    newDataGuest.lConfirm = dateConfirm;
+  }
   const updates = {};
   updates['invitados/' + uidGuest] = newDataGuest;
   return update(dbRef, updates);
@@ -54,15 +71,15 @@ async function getDataGuest(uidGuest) {
     if (snapshot.exists()) {
       return snapshot.val();
     } else {
-      console.log("No data available");
+      localStorage.removeItem('showConfirm');
+      localStorage.removeItem('uid');
+      location.reload();
     }
   }).catch((error) => {
     console.error(error);
   });
   return getData;
 }
-
-
 
 const alertConfirm = document.getElementById('showConfirmation');
 const showConfirm = localStorage.getItem('showConfirm');
@@ -85,7 +102,6 @@ images.forEach(image => {
     img.onload = () => {
         imagesLoaded++;
         if (imagesLoaded == images.length) {
-            console.log('finish')
             var envelopeBackground = document.getElementById("uploadBackground");
             if (envelopeBackground.style.display === "none") {
                 envelopeBackground.style.display = "block";
@@ -124,11 +140,10 @@ const confirmationWindow = document.getElementById('confirmationWindow');
 const countdownRef = document.getElementById("countdownRef");
 const confirmationRef = document.getElementById("confirmationRef");
 const nameGuest = document.getElementById("nameGuest");
-
+const confirmInput = document.querySelectorAll('input[name="confirm"]');
 const totalGuest = document.getElementById("totalGuest");
 // const closeX = document.getElementsByClassName("closeX");
 const  closeX = document.querySelectorAll('.closeX');
-console.log(closeX)
 
 countdownRef.onclick = function(event) {
     event.preventDefault(); 
@@ -137,9 +152,7 @@ countdownRef.onclick = function(event) {
 
 confirmationRef.onclick = async function(event) {
   event.preventDefault();
-  console.log('uid: ',uidGuestG);
-  const dataGuest = await getDataGuest(uidGuestG);
-  console.log(dataGuest);
+  dataGuest = await getDataGuest(uidGuestG);
   nameGuest.value = dataGuest.name;
   if( dataGuest.confirm.toString() != '') {
     document.querySelector(`input[type="radio"][value=${dataGuest.confirm.toString()}]`).checked = true;
@@ -149,20 +162,27 @@ confirmationRef.onclick = async function(event) {
   confirmationWindow.style.display = "block";
 }
 
-
 closeX.forEach(function(element) {
   element.onclick = function() {
-    console.log("cerrar")
     countdownWindow.style.display = 'none';
     confirmationWindow.style.display = 'none';
   }
 });
 
-
+confirmInput.forEach(function(element) {
+  element.onclick = function(event) {
+    const confirm = document.querySelector('input[name="confirm"]:checked');
+    if (confirm.value === 'true') {
+      totalGuest.disabled = false;
+    } else {
+      totalGuest.disabled = true;
+      totalGuest.value = 0;
+    }
+  }
+});
 
 saveConfirm.onclick = function() {
   const confirm = document.querySelector('input[name="confirm"]:checked');
-  console.log(confirm.value);
   updateGuestData(uidGuestG, nameGuest.value, (confirm.value === 'true'), parseInt(totalGuest.value));
   confirmationWindow.style.display = 'none';
   localStorage.setItem('showConfirm', true);

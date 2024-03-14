@@ -8,60 +8,74 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <meta property="og:title" content="Mi bautizo" />
     <meta property="og:description" content="Te espero el 7 de Abril" />
-    <meta property="og:image" itemprop="image" content="https://cdn-icons-png.flaticon.com/512/3485/3485800.png">
+    <meta property="og:image" itemprop="image" content="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/bautizo_thumbnail.png?alt=media&token=e4fb31c9-2c06-49ca-a176-acbc338a9c6e">
 </head>
 <body>
 
+    <div id="uploadBackground">
+        <div class="contact-envelope">
+            <div class="envelope">
+                <div class="envelope-back"></div>
+                <div class="message"></div>
+                <div class="envelope-front"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+    </div>
+
     <div id="wrapper">
-        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/page1.svg?alt=media&token=34fe0114-1ee1-42d3-ab24-52ced7cfc5b4" alt="">
-        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/page2.svg?alt=media&token=ecdbbb46-9d77-40d3-b6fe-181af3b7e57b" alt="">
-        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/page3.svg?alt=media&token=ce5029a4-5cd6-4da6-8779-c1b084587b9e" alt="">        
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/bautizo_1.png?alt=media&token=28303ebe-ccd2-4a03-930a-21af153df4e7" alt="">
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/bautizo_21.png?alt=media&token=421f7d74-af12-45f1-ad8f-96571d005acf" alt="">
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitaciones-1cb9e.appspot.com/o/bautizo_3.png?alt=media&token=2029070c-468e-421d-87fe-415d12ebec99" alt="">        
     </div>
 
     <div id="leftPanel">
         <div id="address" class="shortcut">
             <a href="https://maps.app.goo.gl/7dkfoTR8EVZCZzgU6">
-                <img src="<%= require('./assets/address.svg') %>" alt="">
+                <img src="<%= require('./assets/address.svg') %>" alt="" hidden>
             </a>            
         </div>
         <div id="countdown" class="shortcut">
             <a href="" id="countdownRef">
-                <img src="<%= require('./assets/countdown.svg') %>" alt="">
+                <img src="<%= require('./assets/countdown.svg') %>" alt="" hidden>
             </a>            
         </div>        
         <div id="confirmation" class="shortcut">
             <div id="showConfirmation" class="pulse"></div>
             <a href="" id="confirmationRef">
-                <img src="<%= require('./assets/confirmation.svg') %>" alt="">
+                <img src="<%= require('./assets/confirmation.svg') %>" alt="" hidden>
             </a>
         </div>
     </div>
 
-    <div id="countdownWindow" class="modal">
+    <div id="countdownWindow" class="modal" hidden>
         <div class="modal-content">
             <span class="closeX">&times;</span>
+            <div class="title">
+                Faltan:
+            </div>
             <div class="timer">
                 <div class="sub_timer">
-                    <h1 id="day" class="digit">00</h1>
+                    <h1 id="day" class="digit"></h1>
                     <p class="digit_name">Dias</p>
                 </div>
                 <div class="sub_timer">
-                    <h1 id="hour" class="digit">00</h1>
+                    <h1 id="hour" class="digit"></h1>
                     <p class="digit_name">Horas</p>
                 </div>
                 <div class="sub_timer">
-                    <h1 id="min" class="digit">00</h1>
+                    <h1 id="min" class="digit"></h1>
                     <p class="digit_name">Minutos</p>
                 </div>
                 <div class="sub_timer">
-                    <h1 id="sec" class="digit">00</h1>
+                    <h1 id="sec" class="digit"></h1>
                     <p class="digit_name">Segundos</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="confirmationWindow" class="modal">
+    <div id="confirmationWindow" class="modal" hidden>
         <div class="modal-content">
             <span class="closeX">&times;</span>
             <div class="form">
@@ -90,16 +104,7 @@
         </div>
     </div>
 
-    <div id="uploadBackground">
-        <div class="contact-envelope">
-            <div class="envelope">
-                <div class="envelope-back"></div>
-                <div class="message"></div>
-                <div class="envelope-front"></div>
-            </div>
-            <div class="shadow"></div>
-        </div>
-    </div>
+    
     
 </body>
 </html>
