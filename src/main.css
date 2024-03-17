@@ -8,7 +8,7 @@ html, body {
     width: 100%;   
 }
 .page {
-    width: 100vw;    
+    width: 100%;    
 }
 
 
@@ -23,10 +23,11 @@ html, body {
     max-width: 96px;
     min-width: 32px;
     border-radius: 10px;
-    background: rgba(247, 96, 196, 0.2);
+    background: rgba(247, 65, 201, 0.2);
     backdrop-filter: blur(20px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
     overflow: hidden;
+    padding: 10px;
 }
 .shortcut {
     width: 100%;
@@ -120,12 +121,12 @@ html, body {
     justify-content: center;
     align-items: center;
     z-index: 10001;
-    background: rgb(255, 120, 176);
+    background: rgb(243, 89, 235);
 }
 .contact-envelope {
     position: relative;
     border-radius: 50%;
-    background-color: #b549f4;
+    background-color: #be49f4;
     width:200px;
     height: 200px;
     z-index:-1;
@@ -249,8 +250,8 @@ html, body {
     height: 0px;
     border-radius: 10px;
     background: rgba(140, 0, 255, 0);
-    -webkit-box-shadow: 0 0 0 0 rgb(140, 0, 255);
-    box-shadow: 0 0 0 0 rgb(140, 0, 255);
+    -webkit-box-shadow: 0 0 0 0 rgb(0, 0, 255);
+    box-shadow: 0 0 0 0 rgb(0, 0, 255);
     -webkit-animation: pulse 1.25s infinite cubic-bezier(.66, 0, 0, 1);
     animation: pulse 1.25s infinite cubic-bezier(.66, 0, 0, 1);
 }
@@ -388,3 +389,4 @@ html, body {
       width: 90%;
     }
   }
+  

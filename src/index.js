@@ -6,13 +6,13 @@ import { getDatabase, ref, set, update, get, child} from "firebase/database";
 
 //Initialize firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDTwgtxgobWdVtATK2hnnE8Ney6dnYogI8",
-  authDomain: "invitaciones-1cb9e.firebaseapp.com",
-  databaseURL: "https://invitaciones-1cb9e-default-rtdb.firebaseio.com",
-  projectId: "invitaciones-1cb9e",
-  storageBucket: "invitaciones-1cb9e.appspot.com",
-  messagingSenderId: "28631399196",
-  appId: "1:28631399196:web:92fe740523c62a07bf98d9"
+  apiKey: "AIzaSyD58_CuPxsPsPF3C7ivUYKsjz__DxEUj2k",
+  authDomain: "invitacion-xv-demo-eeff8.firebaseapp.com",
+  projectId: "invitacion-xv-demo-eeff8",
+  storageBucket: "invitacion-xv-demo-eeff8.appspot.com",
+  messagingSenderId: "928152016075",
+  appId: "1:928152016075:web:69b325ba5b3681eb07374e",
+  databaseURL: "https://invitacion-xv-demo-eeff8-default-rtdb.firebaseio.com"
 };
 
 let uidGuestG = localStorage.getItem('uid');
