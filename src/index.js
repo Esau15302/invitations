@@ -4,23 +4,24 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, update, get, child} from "firebase/database";
 
 
+const eventDate = new Date('2024-08-23 10:00:00').getTime();
+
 //Initialize firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyD58_CuPxsPsPF3C7ivUYKsjz__DxEUj2k",
-  authDomain: "invitacion-xv-demo-eeff8.firebaseapp.com",
-  projectId: "invitacion-xv-demo-eeff8",
-  storageBucket: "invitacion-xv-demo-eeff8.appspot.com",
-  messagingSenderId: "928152016075",
-  appId: "1:928152016075:web:69b325ba5b3681eb07374e",
-  databaseURL: "https://invitacion-xv-demo-eeff8-default-rtdb.firebaseio.com"
+  apiKey: "AIzaSyAR_Fx8cqp8ebtvjAaO5xLsPqOkUblvZ8o",
+  authDomain: "invitacion-bautizo-demo.firebaseapp.com",
+  databaseURL: "https://invitacion-bautizo-demo-default-rtdb.firebaseio.com",
+  projectId: "invitacion-bautizo-demo",
+  storageBucket: "invitacion-bautizo-demo.appspot.com",
+  messagingSenderId: "959979877237",
+  appId: "1:959979877237:web:68523f36bc3d68d402d93c"
 };
-
-let uidGuestG = localStorage.getItem('uid');
-
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const dbRef = ref(db);
 let dataGuest = null;
+
+let uidGuestG = localStorage.getItem('uid');
 
 function getTimestampInSeconds () {
   return Date.now().toString();
@@ -55,10 +56,13 @@ function updateGuestData(uidGuest, name, confirm, totalGuests) {
     fConfirm: dataGuest.fConfirm,
     lConfirm: dataGuest.lConfirm
   };
+  if(confirm) {
+    newDataGuest.total = totalGuests + 1;
+  }
   if (!dataGuest.fConfirm) {
-    newDataGuest.fConfirm = dateConfirm;
+    newDataGuest.fConfirm = dateConfirm;    //Date of first confirmation
   } else {
-    newDataGuest.lConfirm = dateConfirm;
+    newDataGuest.lConfirm = dateConfirm;    //Date of last consfirmation
   }
   const updates = {};
   updates['invitados/' + uidGuest] = newDataGuest;
@@ -71,7 +75,7 @@ async function getDataGuest(uidGuest) {
     if (snapshot.exists()) {
       return snapshot.val();
     } else {
-      localStorage.removeItem('showConfirm');
+      localStorage.removeItem('showFocus');   //If uidGuest not exist generate a new
       localStorage.removeItem('uid');
       location.reload();
     }
@@ -81,84 +85,104 @@ async function getDataGuest(uidGuest) {
   return getData;
 }
 
-const alertConfirm = document.getElementById('showConfirmation');
-const showConfirm = localStorage.getItem('showConfirm');
+function timer() {
+  const nowDate = new Date().getTime();
+  const remainingSec = Math.floor( (eventDate - nowDate) / 1000 );
+  const day = Math.floor(remainingSec / (3600 * 24));
+  const hour = Math.floor((remainingSec % (3600 * 24)) / 3600);
+  const min = Math.floor((remainingSec % 3600) / 60);
+  const month = Math.floor(day / 30.44);
+  document.querySelector("#month").innerHTML = month;
+  document.querySelector("#day").innerHTML = Math.floor(day % 30.44);
+  document.querySelector("#hour").innerHTML = hour;
+  document.querySelector("#min").innerHTML = min;
+}
+
+//Main
+const confirmationWindow = document.getElementById('confirmationWindow');
+const confirmInput = document.querySelectorAll('input[name="confirm"]');
+const envelopeBackground = document.getElementById("uploadBackground");
+const envelopeWrapper = document.getElementById('envelopeWrapper');
+const countdownWindow = document.getElementById('countdownWindow');
+const confirmationRef = document.getElementById("confirmationRef");
+const countdownRef = document.getElementById("countdownRef");
+const notification = document.getElementById("notification");
+const musicBackground = document.getElementById("music");
+const totalGuest = document.getElementById("totalGuest");
+const nameGuest = document.getElementById("nameGuest");
+const textCircle = document.getElementById("textCircle");
+const closeX = document.querySelectorAll('.closeX');
+const showFocus = localStorage.getItem('showFocus');
+const musicOn = document.getElementById("musicOn");
+const musicOff = document.getElementById("musicOff");
+const pages = document.getElementsByClassName('page');
+const controlls = document.getElementsByClassName('controlls');
+const focus = document.getElementById('focus');
+const textConfirm = document.getElementById("textConfirm");
+const textName = document.getElementById("textName");
+let imagesLoaded = 0;
+let openEnvelope = false;
+
 
 if(!uidGuestG) {
   registerGuestDefault();
 }
 
-if(showConfirm) {
-  alertConfirm.style.display = 'none';
+if(showFocus) {
+  focus.style.display = 'none';
 }
 
-
-//Hide loader
-let imagesLoaded = 0;
-const images = document.querySelectorAll('img');
-images.forEach(image => {
+//Wait for all the pages to load  
+for (const page of pages ) {
     const img = new Image();
-    img.src = image.src;
+    img.src = page.src;
     img.onload = () => {
         imagesLoaded++;
-        if (imagesLoaded == images.length) {
-            var envelopeBackground = document.getElementById("uploadBackground");
-            if (envelopeBackground.style.display === "none") {
-                envelopeBackground.style.display = "block";
-            } else {
-                envelopeBackground.style.display = "none";
+        if (imagesLoaded == pages.length) {
+          for (const controll of controlls ) {
+            if (controll.getAttribute('id') === 'musicOff') {    //Review
+              controll.style.display = 'none';
+              continue;
             }
-            images.forEach(image => {
-                image.removeAttribute('hidden');
-                window.scrollTo(0, 0);
-            }) 
+            controll.style.visibility='visible';             
+          };
+          textCircle.style.visibility='visible';  
+          window.scrollTo(0, 0);            
         }
     }
-});
+};
 
 //Countdown
-const target_mili_sec = new Date('2024-04-07').getTime();
-function timer() {
-  const now_mili_sec = new Date().getTime();
-  const remaining_sec = Math.floor( (target_mili_sec - now_mili_sec) / 1000 );
-
-  const day = Math.floor(remaining_sec / (3600 * 24));
-  const hour = Math.floor((remaining_sec % (3600 * 24)) / 3600);
-  const min = Math.floor((remaining_sec % 3600) / 60);
-  const sec = Math.floor(remaining_sec % 60);
-
-  document.querySelector("#day").innerHTML = day;
-  document.querySelector("#hour").innerHTML = hour;
-  document.querySelector("#min").innerHTML = min;
-  document.querySelector("#sec").innerHTML = sec;
-}
 setInterval(timer, 1000);
 
 //Show modal
-const countdownWindow = document.getElementById('countdownWindow');
-const confirmationWindow = document.getElementById('confirmationWindow');
-const countdownRef = document.getElementById("countdownRef");
-const confirmationRef = document.getElementById("confirmationRef");
-const nameGuest = document.getElementById("nameGuest");
-const confirmInput = document.querySelectorAll('input[name="confirm"]');
-const totalGuest = document.getElementById("totalGuest");
-// const closeX = document.getElementsByClassName("closeX");
-const  closeX = document.querySelectorAll('.closeX');
-
 countdownRef.onclick = function(event) {
-    event.preventDefault(); 
-    countdownWindow.style.display = "block";
+  event.preventDefault(); 
+  countdownWindow.style.display = "block";
 }
 
 confirmationRef.onclick = async function(event) {
   event.preventDefault();
+  notification.innerHTML = '';
   dataGuest = await getDataGuest(uidGuestG);
+  if(dataGuest.name){
+    textName.innerHTML = 'Hola:';
+  }
   nameGuest.value = dataGuest.name;
   if( dataGuest.confirm.toString() != '') {
     document.querySelector(`input[type="radio"][value=${dataGuest.confirm.toString()}]`).checked = true;
+    if( dataGuest.confirm) {
+      textConfirm.innerHTML = 'Cuantas personas vendrán contigo:'
+      totalGuest.disabled = false;
+    }else {
+      textConfirm.innerHTML = 'No vendrás &#128546;'
+      totalGuest.disabled = true;
+    }
   }
-  
-  totalGuest.value = dataGuest.total;
+  if (dataGuest.total> 0) {
+    dataGuest.total --;    //No include principal guest 
+  }
+  totalGuest.value = dataGuest.total? dataGuest.total : '';
   confirmationWindow.style.display = "block";
 }
 
@@ -173,20 +197,27 @@ confirmInput.forEach(function(element) {
   element.onclick = function(event) {
     const confirm = document.querySelector('input[name="confirm"]:checked');
     if (confirm.value === 'true') {
+      textConfirm.innerHTML = 'Cuantas personas vendrán contigo:'
       totalGuest.disabled = false;
     } else {
+      textConfirm.innerHTML = 'No vendrás &#128546;'
       totalGuest.disabled = true;
-      totalGuest.value = 0;
+      totalGuest.value = '';
     }
   }
 });
 
 saveConfirm.onclick = function() {
   const confirm = document.querySelector('input[name="confirm"]:checked');
-  updateGuestData(uidGuestG, nameGuest.value, (confirm.value === 'true'), parseInt(totalGuest.value));
+  if (!nameGuest.value) {
+    notification.innerHTML = 'Por favor escribe tu nombre.';
+    nameGuest.focus();
+    return;
+  }
+  updateGuestData(uidGuestG, nameGuest.value, (confirm.value === 'true'), parseInt(totalGuest.value ? totalGuest.value : 0)); //Add principal guest
   confirmationWindow.style.display = 'none';
-  localStorage.setItem('showConfirm', true);
-  alertConfirm.style.display = 'none';
+  localStorage.setItem('showFocus', true);
+  focus.style.display = 'none';
 }
 
 window.onclick = function(event) {
@@ -200,4 +231,35 @@ window.addEventListener('touchend', function(event) {
     countdownWindow.style.display = "none";
   }
 });
+
+envelopeWrapper.onclick = function(event) {
+  musicBackground.play();
+  envelopeBackground.style.display = "none";
+  openEnvelope = true;
+}
+
+document.addEventListener('visibilitychange', (event) => {
+  if(document.visibilityState === 'visible' && openEnvelope){
+    musicBackground.play();
+  } else {
+    musicBackground.pause();
+  }
+})
+
+musicOnOff.onclick = function(event) {
+  if (musicBackground.paused) {
+    musicOff.style.display = 'none';
+    musicOff.style.visibility = 'hidden';
+    musicOn.style.display = 'block';
+    musicOn.style.visibility = 'visible';
+    musicBackground.play();
+  } else {
+    musicOn.style.display = 'none';
+    musicOn.style.visibility = 'hidden';
+    musicOff.style.display = 'block';
+    musicOff.style.visibility = 'visible';
+    musicBackground.pause();
+  }
+}
+
 

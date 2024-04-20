@@ -6,14 +6,20 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title><%= htmlWebpackPlugin.options.title %></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta property="og:title" content="Mis XV" />
-    <meta property="og:description" content="Te espero el 20 de Julio" />
-    <meta property="og:image" itemprop="image" content="https://firebasestorage.googleapis.com/v0/b/invitacion-xv-demo-eeff8.appspot.com/o/xv_thumbnail.png?alt=media&token=4f8d4933-96a1-466b-9bbf-4ba16207f977">
+    <meta property="og:title" content="Mi bautizo" />
+    <meta property="og:description" content="Te espero el 23 de Agosto" />
+    <meta property="og:image" itemprop="image" content="https://firebasestorage.googleapis.com/v0/b/invitacion-bautizo-demo.appspot.com/o/ohanaIDv2.png?alt=media&token=7ab78b86-9a40-4830-85c1-37b752256c46">
 </head>
 <body>
 
     <div id="uploadBackground">
-        <div class="contact-envelope">
+        <div class="contact-envelope" id="envelopeWrapper">
+            <svg id="textCircle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="visibility: hidden;">
+                <path id="circlePath" fill="none" stroke-width="0"  d="M 10, 50 a 40,40 0 1,1 80,0 40,40 0 1,1 -80,0"/>
+                <text font-family="serif" font-size="15"  fill="var(--text-1)" >
+                    <textPath href="#circlePath">&nbsp;&nbsp;&nbsp;Presiona el sobre</textPath>
+                </text>
+            </svg>
             <div class="envelope">
                 <div class="envelope-back"></div>
                 <div class="message"></div>
@@ -24,27 +30,33 @@
     </div>
 
     <div id="wrapper">
-        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitacion-xv-demo-eeff8.appspot.com/o/xv_1.png?alt=media&token=9a7dd5fe-dd3c-4928-bc8e-75bb61039d45" alt="">
-        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitacion-xv-demo-eeff8.appspot.com/o/xv_2.png?alt=media&token=5ae58cb2-f038-4360-81cd-d30f2c60f9c5" alt="">
-        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitacion-xv-demo-eeff8.appspot.com/o/xv_3.png?alt=media&token=72572a9d-3246-4f6c-9511-3e237ea41688" alt="">        
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitacion-bautizo-demo.appspot.com/o/bautizo_1.png?alt=media&token=c7ed6649-d549-498f-808e-5252747db044" alt="">
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitacion-bautizo-demo.appspot.com/o/bautizo_2.png?alt=media&token=35ced41d-90b2-4885-95bc-7ccfddeadc41" alt="">
+        <img class="page" src="https://firebasestorage.googleapis.com/v0/b/invitacion-bautizo-demo.appspot.com/o/bautizo_3.png?alt=media&token=35506184-acc1-4f24-b888-c4d49152a83c" alt="">        
     </div>
 
     <div id="leftPanel">
         <div id="address" class="shortcut">
-            <a href="https://maps.app.goo.gl/7dkfoTR8EVZCZzgU6">
-                <img src="<%= require('./assets/address.svg') %>" alt="" hidden>
+            <a href="https://maps.app.goo.gl/p1ZjF4ynwDHiW2FV9">
+                <svg class="controlls" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"  style="visibility: hidden;"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M408 120c0 54.6-73.1 151.9-105.2 192c-7.7 9.6-22 9.6-29.6 0C241.1 271.9 168 174.6 168 120C168 53.7 221.7 0 288 0s120 53.7 120 120zm8 80.4c3.5-6.9 6.7-13.8 9.6-20.6c.5-1.2 1-2.5 1.5-3.7l116-46.4C558.9 123.4 576 135 576 152V422.8c0 9.8-6 18.6-15.1 22.3L416 503V200.4zM137.6 138.3c2.4 14.1 7.2 28.3 12.8 41.5c2.9 6.8 6.1 13.7 9.6 20.6V451.8L32.9 502.7C17.1 509 0 497.4 0 480.4V209.6c0-9.8 6-18.6 15.1-22.3l122.6-49zM327.8 332c13.9-17.4 35.7-45.7 56.2-77V504.3L192 449.4V255c20.5 31.3 42.3 59.6 56.2 77c20.5 25.6 59.1 25.6 79.6 0zM288 152a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></svg>
             </a>            
         </div>
         <div id="countdown" class="shortcut">
             <a href="" id="countdownRef">
-                <img src="<%= require('./assets/countdown.svg') %>" alt="" hidden>
+                <svg class="controlls" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"  style="visibility: hidden;"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg>
             </a>            
         </div>        
         <div id="confirmation" class="shortcut">
-            <div id="showConfirmation" class="pulse"></div>
+            <div id="focus" class="pulse"></div>
             <a href="" id="confirmationRef">
-                <img src="<%= require('./assets/confirmation.svg') %>" alt="" hidden>
+                <svg class="controlls" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"  style="visibility: hidden;"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM625 177L497 305c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L591 143c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>
             </a>
+        </div>
+        <div id="musicOnOff"  class="shortcut">
+            <a>
+                <svg id="musicOn" class="controlls" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"  style="visibility: hidden;"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M533.6 32.5C598.5 85.2 640 165.8 640 256s-41.5 170.7-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"/></svg>
+                <svg id="musicOff" class="controlls" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="visibility: hidden;"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3zM425 167l55 55 55-55c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-55 55 55 55c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-55-55-55 55c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l55-55-55-55c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z"/></svg>
+            </a>            
         </div>
     </div>
 
@@ -55,6 +67,10 @@
                 Faltan:
             </div>
             <div class="timer">
+                <div class="sub_timer">
+                    <h1 id="month" class="digit"></h1>
+                    <p class="digit_name">Meses</p>
+                </div>
                 <div class="sub_timer">
                     <h1 id="day" class="digit"></h1>
                     <p class="digit_name">Dias</p>
@@ -67,10 +83,6 @@
                     <h1 id="min" class="digit"></h1>
                     <p class="digit_name">Minutos</p>
                 </div>
-                <div class="sub_timer">
-                    <h1 id="sec" class="digit"></h1>
-                    <p class="digit_name">Segundos</p>
-                </div>
             </div>
         </div>
     </div>
@@ -80,11 +92,13 @@
             <span class="closeX">&times;</span>
             <div class="form">
                 <div class="form-group">
-                    <label for="nameGuest">Hola:</label>
-                    <input type="text" id="nameGuest" name="nameGuest" placeholder="Escribe tu nombre...">
+                    <input class="specialInput" type="text" id="nameGuest" name="nameGuest" required>
+                    <label class="lblInput">
+                        <span class="textInput" id="textName">Escribe tu nombre:</span>
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label for="totalGuest">Podras acompañarnos:</label>
+                    <label>Podrás acompañarnos:</label>
                     <input type="radio" name="confirm" value="true" id="yes" checked />
                     <input type="radio" name="confirm" value="false" id="no"/>
                     <div class="switch">
@@ -94,53 +108,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="totalGuest">Cuantas personas vendrán contigo:</label>
-                    <input type="number" id="totalGuest" name="totalGuest">
+                    <input class="specialInput" type="number" id="totalGuest" name="totalGuest">
+                    <label  class="lblInput">
+                        <span class="textInput" id="textConfirm">Cuantas personas vendrán contigo:</span>
+                    </label>
                 </div>
                 <button id="saveConfirm">Confirmar</button>
+                <span id="notification"></span>
             </div>
 
 
         </div>
     </div>
 
+    <audio id="music" loop>
+        <source src="https://firebasestorage.googleapis.com/v0/b/invitacion-bautizo-demo.appspot.com/o/Twinkle%20Twinkle%20Little%20Star%20(instrumental)%20-%20The%20Green%20Orbs%20-%20reduce.mp3?alt=media&token=6935eafb-c5c4-44fa-a641-ae1e0faeb7ae" type="audio/mpeg">
+        This browser not support audio.
+    </audio>
 
-    <body class="flex items-center justify-center p-6 bg-gray-900 min-h-screen">
-        <section class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
-          <div class="relative p-5 bg-gradient-to-r from-teal-400 to-green-500 rounded-md overflow-hidden">
-            <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">$5000.00</div>
-            <div class="relative z-10 text-green-200 leading-none font-semibold">Next month's income</div>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-green-600 opacity-50">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div class="relative p-5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-md overflow-hidden">
-            <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">110</div>
-            <div class="relative z-10 text-blue-200 leading-none font-semibold">Members</div>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-blue-700 opacity-50">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-          </div>
-          <div class="relative p-5 bg-gradient-to-r from-red-400 to-red-600 rounded-md overflow-hidden">
-            <div class="relative z-10 mb-4 text-white text-4xl leading-none font-semibold">3</div>
-            <div class="relative z-10 text-red-200 leading-none font-semibold">Upcoming cancellations</div>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-red-700 opacity-50">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <div class="relative p-5 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-md overflow-hidden">
-            <div class=" mb-4 text-white text-4xl leading-none font-semibold">97.00%</div>
-            <div class="text-yellow-200 leading-none font-semibold">Retention rate</div>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="absolute right-0 bottom-0 h-32 w-32 -mr-8 -mb-8 text-yellow-700 opacity-50">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-            </svg>
-          </div>
-        </section>
-      </body>
-
-    
     
 </body>
 </html>

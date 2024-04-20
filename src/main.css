@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+:root {
+  --color-primary: rgb(201, 42, 108);
+  --color-primary-a: rgba(201, 42, 108, 0.5);
+  --color-secundary: rgb(255, 143, 208);
+  --color-secundary-a: rgba(255, 143, 208, 0.3);
+}
+
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    font-family: cursive;
+    font-family: 'Open Sans', sans-serif;
 }
 #wrapper {
     width: 100%;   
@@ -10,7 +19,6 @@ html, body {
 .page {
     width: 100%;    
 }
-
 
 /* Left panel */
 #leftPanel {
@@ -23,9 +31,9 @@ html, body {
     max-width: 96px;
     min-width: 32px;
     border-radius: 10px;
-    background: rgba(247, 65, 201, 0.2);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+    background: var(--color-secundary-a);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
     overflow: hidden;
     padding: 10px;
 }
@@ -35,7 +43,6 @@ html, body {
     margin-bottom: 5vh;
     position: relative;
 }
-
 
 /* Countdown */
 .timer{
@@ -48,7 +55,7 @@ html, body {
     width: 15vw;
     max-width: 200px;
     min-width: 70px;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--color-secundary-a);
     backdrop-filter: blur(20px);
     border-radius: 20px;
     /* overflow: hidden; */
@@ -61,7 +68,7 @@ html, body {
 }
 .digit_name{
     color: #000;
-    background: #fff;
+    /* background: var(--color-secundary-a); */
     text-align: center;
     padding: 0.6rem 0;
     font-size: 15px;
@@ -83,12 +90,11 @@ html, body {
 }
 .modal-content {
     position: relative;
-    background-color: #ffffff;
+    background-color: var(--color-secundary-a);
     margin: 15% auto; 
     padding: 20px;
-    width: 80vw; 
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 80vw;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 }
 .closeX {
@@ -121,12 +127,13 @@ html, body {
     justify-content: center;
     align-items: center;
     z-index: 10001;
-    background: rgb(243, 89, 235);
+    background: var(--color-secundary); /* change */
 }
 .contact-envelope {
+    cursor: pointer;
     position: relative;
     border-radius: 50%;
-    background-color: #be49f4;
+    background-color: var(--color-primary-a); /* change */
     width:200px;
     height: 200px;
     z-index:-1;
@@ -140,7 +147,6 @@ html, body {
     height: 200px;
     animation: bounce 1s ease infinite;
 }
-  
 .envelope-back {
     position: absolute;
     background-color: #e19605;
@@ -250,8 +256,8 @@ html, body {
     height: 0px;
     border-radius: 10px;
     background: rgba(140, 0, 255, 0);
-    -webkit-box-shadow: 0 0 0 0 rgb(0, 0, 255);
-    box-shadow: 0 0 0 0 rgb(0, 0, 255);
+    -webkit-box-shadow: 0 0 0 0 var(--color-primary);
+    box-shadow: 0 0 0 0 var(--color-primary);
     -webkit-animation: pulse 1.25s infinite cubic-bezier(.66, 0, 0, 1);
     animation: pulse 1.25s infinite cubic-bezier(.66, 0, 0, 1);
 }
@@ -275,11 +281,11 @@ html, body {
 .switch {
     position: relative;
     width: 100%;
-    height: 25px;
+    height: 30px;
     text-align: center;
-    background: #4cd964;
+    background: #4cd958;
     transition: all 0.2s ease;
-    border-radius: 25px;
+    border-radius: 10px;
   }
   .switch span {
     position: absolute;
@@ -310,19 +316,22 @@ html, body {
   }
   .switch label {
     cursor: pointer;
-    color: rgba(0,0,0,0.2);
     width: 60px;
     line-height: 25px;
     transition: all 0.2s ease;
   }
   label[for=yes] {
     position: absolute;
+    font-size: 25px;
     left: 0px;
     height: 20px;
+    padding: 2px;
   }
   label[for=no] {
     position: absolute;
+    font-size: 25px;
     right: 0px;
+    padding: 2px;
   }
   #no:checked ~ .switch {
     background: #ff3b30;
@@ -344,14 +353,12 @@ html, body {
     color: #fff;
   }
 
-  
-
 
 /* Form confirmation */
   .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     max-width: 500px;
     margin: auto;
   }
@@ -359,27 +366,55 @@ html, body {
   .form-group {
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   
-  label {
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical; /* para que el textarea sea redimensionable solo verticalmente */
-  }
-  
+  .specialInput{
+		width: 100%;
+		height: 100%;
+		background: none;
+		padding-top: 20px;
+		border: none;
+		outline: 0px;
+    font-size: 14px;
+	}
+	.lblInput{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+	.lblInput:after{
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: -1px;
+		width: 100%;
+		height: 100%;
+		border-bottom: 2px solid var(--color-primary);
+		transition: all 0.3s ease;
+	}
+	.textInput{
+    content: '';
+		position: absolute;
+		bottom: 5px;
+		left: 0;
+		transition: all 0.2s ease;
+	}
+	.specialInput:focus + .lblInput .textInput,.specialInput:valid + .lblInput .textInput{
+		transform: translateY(-100%);
+		font-size: 14px;
+	
+	}
+
   button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--color-primary);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
   }
   
@@ -389,4 +424,17 @@ html, body {
       width: 90%;
     }
   }
-  
+
+  /* Notification */
+  #notification {
+    text-align: center;
+    background-color: rgb(255, 78, 78);
+  }
+
+  #textCircle {
+    position: absolute;
+  }
+
+.controlls {
+  fill: var(--color-primary);
+}
